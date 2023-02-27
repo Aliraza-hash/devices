@@ -19,7 +19,7 @@ function App() {
     // }
 
 
-    fetch('http://localhost:2002/api/rooms/getallrooms', {
+    fetch('http://device-reservation.onrender.com/api/rooms/getallrooms', {
       method: 'get',
       headers: { 'Content-Type': 'application/json' }
     }).then(response => response.json()).then(data => {
@@ -39,7 +39,7 @@ function App() {
       location
     }
     try{
-      const result=(await axios.post('http://localhost:2002/api/rooms/getallrooms',details)).data;
+      const result=(await axios.post('http://device-reservation.onrender.com/api/rooms/getallrooms',details)).data;
           window.location.href="/"
     }
     catch(error)
