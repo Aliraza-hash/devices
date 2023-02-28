@@ -10,7 +10,8 @@ const roomSchema=mongoose.Schema({
     S_no:Number,
     username:[],
     date:[],
-    location:[],
+    location:String,
+    comments:String,
     topology:[],
     },{
         timestamps:true

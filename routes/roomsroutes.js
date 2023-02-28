@@ -44,13 +44,14 @@ router.post('/getallrooms',async(req,res)=>{
 
     var d=req.body.date;
 
-    var e=req.body.location;
-
+    var e=req.body.comments;
     roomtemp.username.push(c);
-
     roomtemp.date.push(d);
+    roomtemp.comments=e;
 
-    roomtemp.location.push(e);
+
+
+
 
     // rooomtemp.date.push(req.body.date)
 
@@ -60,6 +61,8 @@ router.post('/getallrooms',async(req,res)=>{
 
 
     await roomtemp.save();
+
+    console.log(roomtemp)
 
     res.send(roomtemp)
     }
