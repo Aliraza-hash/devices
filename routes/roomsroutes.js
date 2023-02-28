@@ -25,6 +25,8 @@ router.get('/getallrooms',async(req,res)=>{
 
 });
 
+
+
 router.post('/getallrooms',async(req,res)=>{
     // const newroom=new Room({name:req.body.name, username:req.body.username,date:req.body.date,location:req.body.location})
     // await newroom.save()
@@ -64,6 +66,29 @@ router.post('/getallrooms',async(req,res)=>{
 
     console.log(roomtemp)
 
+    res.send(roomtemp)
+    }
+    catch(error){
+        console.log({error})
+        res.status(400).json({error})
+    }
+})
+
+
+router.post('/getallcomments',async(req,res)=>{
+    // const newroom=new Room({name:req.body.name, username:req.body.username,date:req.body.date,location:req.body.location})
+    // await newroom.save()
+    // try{
+    //     res.send("New room added successfully")
+    // } catch(error){
+    //     return res.status(400).json({error})
+    // }
+    try{    
+    const roomtemp=await Room.findOne({_id:req.body.id})
+    var e=req.body.comments;
+    roomtemp.comments=e;
+    await roomtemp.save();
+    console.log(roomtemp)
     res.send(roomtemp)
     }
     catch(error){

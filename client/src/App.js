@@ -184,8 +184,25 @@ function Home() {
       console.log(error)
 
     }
-    
   }
+
+
+  async function final1()
+    {
+      const details={
+        id,
+        comments
+      }
+      try{
+        const result=(await axios.post('https://device-reservation.onrender.com/api/rooms/getallcomments',details)).data;
+        window.location.href="/"
+      }
+      catch(error)
+      {
+        console.log(error)
+  
+      }
+    }
 
     return (
         <div>
@@ -223,6 +240,8 @@ function Home() {
                   return <div>{user}</div>
                 })}
                   <input type="text" className='in' placeholder="enter the date for device reservation" onChange={(e)=>{setid(room._id);setname(room.name);setdate(e.target.value)}}></input>
+                  <button onClick={final1}>submit</button>
+
                   </td>
                   <td width="10%" align='centre' className='t'>
                   <div>{room.location}</div>
