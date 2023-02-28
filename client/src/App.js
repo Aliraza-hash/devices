@@ -177,7 +177,7 @@ function Home() {
     }
     try{
       const result=(await axios.post('https://device-reservation.onrender.com/api/rooms/getallrooms',details)).data;
-      // window.location.href="/"
+      window.location.href="/"
     }
     catch(error)
     {
