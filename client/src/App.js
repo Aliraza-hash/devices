@@ -329,7 +329,7 @@ function Home() {
       comments
     }
     try{
-      const result=(await axios.post('http://device-reservation.onrender.com/api/rooms/getallcomments',details)).data;
+      const result=(await axios.post('httpS://device-reservation.onrender.com/api/rooms/getallcomments',details)).data;
       window.location.href="/"
     }
     catch(error)
