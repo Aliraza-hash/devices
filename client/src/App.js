@@ -256,8 +256,6 @@
 
 
 
-
-
 import logo from './logo.svg';
 import './App.css';
 import { useState} from 'react';
@@ -276,6 +274,9 @@ function Home() {
     const [i,seti]=useState(0);
     const [comments,setcomments]=useState();
     const [show, setShow] = useState(false);
+    const [searchKey,setsearchkey]=useState('')
+    const [duplicaterooms,setduplicaterooms]=useState([])
+
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -289,11 +290,12 @@ function Home() {
     // }
 
 
-    fetch('https://device-reservation.onrender.com/api/rooms/getallrooms', {
+    fetch('http://device-reservation.onrender.com/api/rooms/getallrooms', {
       method: 'get',
       headers: { 'Content-Type': 'application/json' }
     }).then(response => response.json()).then(data => {
       setrooms(data)
+      setduplicaterooms(data)
       console.log(data)
     })
   }, [])
@@ -310,7 +312,7 @@ function Home() {
       comments
     }
     try{
-      const result=(await axios.post('https://device-reservation.onrender.com/rooms/getallrooms',details)).data;
+      const result=(await axios.post('http://ldevice-reservation.onrender.com/api/rooms/getallrooms',details)).data;
       window.location.href="/"
     }
     catch(error)
@@ -322,27 +324,34 @@ function Home() {
   }
 
   async function final1(){
-    // setrouter(router)
     const details={
       id,
       comments
     }
     try{
-      const result=(await axios.post('http://localhost:2003/api/rooms/getallcomments',details)).data;
+      const result=(await axios.post('http://device-reservation.onrender.com/api/rooms/getallcomments',details)).data;
       window.location.href="/"
     }
     catch(error)
     {
       console.log(error)
-
-    }
-    
+    } 
   }
+
+  function filterBySearch(){
+     
+    const temprooms=duplicaterooms.filter(room=>room.name.toLowerCase().includes(searchKey.toLowerCase()))
+    
+    setrooms(temprooms)
+
+ }
 
     return (
         <div>
     
-    
+     <div className='col-md-4 mt-4.7'>
+                  <input type="text" width="100%" className='form-control' placeholder='search routers' value={searchKey} onChange={(e)=>{setsearchkey(e.target.value)}} onKeyUp={filterBySearch}/>
+      </div>
     <table width="100%">
             <tr>
               <th width="5%">S.No:</th>
